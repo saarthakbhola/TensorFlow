@@ -4,7 +4,7 @@ import tensorflow as tf
 import xlrd
 
 
-DATA_FILE = 'G:\\Data\\Personal\\data\\fire_theft.xls'
+DATA_FILE = 'G:\\Data\\Personal\\data\\Theft_Data.xls'
 
 # Phase 1: Assemble the graph
 # Step 1: read in data from the .xls file
