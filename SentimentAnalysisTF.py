@@ -9,7 +9,6 @@ import nltk
 import unicodedata
 import sys
 
-tbl = dict.fromkeys
 
 stemmer = PorterStemmer()
 data = None
@@ -20,25 +19,25 @@ with open('F:\\Sentiments.json') as json_data:
 
 Key_categories = list(data.keys())  # collecting the Keys from the key-value pair JSON
 words = []
-docs = []
+document = []
 
 for each_category in data.keys():
     for each_sentence in data[each_category]:
-        w = nltk.word_tokenize(each_sentence)
-        print("tokenized words: ", w)
-        words.extend(w)
-        docs.append((w, each_category))
-words = [stemmer.stem(w.lower()) for w in words]
+        wordToken = nltk.word_tokenize(each_sentence)
+        print(wordToken)
+        words.extend(wordToken)
+        document.append((wordToken, each_category))
+words = [stemmer.stem(wordToken.lower()) for wordToken in words]
 words = sorted(list(set(words)))
 
 print(words)
-print(docs)
+print(document)
 
-training = []
-output = []
+trainingData = []
+outputData = []
 output_empty = [0] * len(Key_categories)
 
-for doc in docs:
+for doc in document:
     BagOfWords = []
     token_words = doc[0]
     token_words = [stemmer.stem(word.lower()) for word in token_words]
@@ -47,10 +46,10 @@ for doc in docs:
 
     output_row = list(output_empty)
     output_row[Key_categories.index(doc[1])] = 1
-    training.append([BagOfWords, output_row])
+    trainingData.append([BagOfWords, output_row])
 
-random.shuffle(training)
-training = np.array(training)
+random.shuffle(trainingData)
+training = np.array(trainingData)
 
 train_x = list(training[:, 0])
 train_y = list(training[:, 1])
