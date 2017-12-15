@@ -73,13 +73,13 @@ def TensorOut(sentence):
 
     sentence_words = [stemmer.stem(word.lower()) for word in sentence_words]
 
-    bow = [0] * len(words)
+    bag_of_words = [0] * len(words)
     for s in sentence_words:
         for i, w in enumerate(words):
             if w == s:
                 bow[i] = 1
 
-    return (np.array(bow))
+    return (np.array(bag_of_words))
 
 
 sentiment_1 = "It was a pathetic movie"
